@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartaz A4 - Missão E-Lixo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CONFIGURAÇÃO EXATA PARA FOLHA A4 */
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e4f4e6;
+            background-image: url('teca2.jpeg');
+            background-repeat: repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .folha-a4 {
+            width: 210mm;
+            height: 297mm;
+            background: rgba(255, 255, 255, 0.94);
+            padding: 12mm 14mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 8px solid #2e7d32;
+            position: relative;
+        }
+
+        /* CABEÇALHO DO CARTAZ */
+        .header-cartaz {
+            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 60%, #43a047 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 18px 20px;
+            border-radius: 20px;
+            box-shadow: 0 6px 15px rgba(27, 94, 32, 0.2);
+        }
+
+        .header-cartaz h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2.6rem;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .header-cartaz p {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #e8f5e9;
+        }
+
+        /* DESTAQUE CENTRAL: TEKA + QR CODE + CHAMADA DO JOGO */
+        .destaque-central {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            background-color: #e4f4e6;
+            border: 3px solid #a3d9b1;
+            border-radius: 22px;
+            padding: 18px 22px;
+            margin: 12px 0;
+        }
+
+        .teka-coluna {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 34%;
+        }
+
+        .teka-coluna img {
+            width: 155px;
+            height: auto;
+            border-radius: 16px;
+            border: 3px solid #ffffff;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+        }
+
+        .badge-teka {
+            background-color: #ff4757;
+            color: #ffffff;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.85rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+
+        .chamada-coluna {
+            width: 36%;
+            text-align: left;
+        }
+
+        .tag-jogo {
+            display: inline-block;
+            background-color: #ffa502;
+            color: #1e272e;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 4px 12px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+
+        .chamada-coluna h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: #1b5e20;
+            font-size: 1.45rem;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+
+        .chamada-coluna p {
+            font-size: 0.92rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .qr-coluna {
+            width: 30%;
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 18px;
+            border: 3px dashed #2e7d32;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .qr-coluna img {
+            width: 135px;
+            height: 135px;
+            margin-bottom: 6px;
+        }
+
+        .qr-coluna span {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.85rem;
+            color: #2e7d32;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .aviso-criancas {
+            font-size: 0.75rem;
+            color: #555;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* SEÇÃO DE PONTOS DE COLETA */
+        .secao-locais {
+            margin: 6px 0;
+        }
+
+        .titulo-locais {
+            font-family: 'Fredoka', sans-serif;
+            color: #2e7d32;
+            font-size: 1.4rem;
+            text-align: center;
+            margin-bottom: 12px;
+            background-color: #f1f8e9;
+            padding: 6px;
+            border-radius: 12px;
+            border: 2px solid #c8e6c9;
+        }
+
+        .grid-locais {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 14px;
+        }
+
+        .card-local {
+            background: #ffffff;
+            border: 2px solid #c8e6c9;
+            border-left: 6px solid #2e7d32;
+            border-radius: 12px;
+            padding: 10px 14px;
+        }
+
+        .card-local h3 {
+            font-family: 'Fredoka', sans-serif;
+            color: #1b5e20;
+            font-size: 1.05rem;
+            margin-bottom: 2px;
+        }
+
+        .card-local p {
+            font-size: 0.85rem;
+            color: #485460;
+            line-height: 1.3;
+        }
+
+        /* RODAPÉ E CRÉDITOS */
+        .rodape-cartaz {
+            text-align: center;
+            border-top: 2px solid #c8e6c9;
+            padding-top: 10px;
+        }
+
+        .aviso-rodape {
+            background-color: #fffde7;
+            border: 1px solid #ffe082;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        .creditos-finais {
+            font-size: 0.8rem;
+            color: #1b5e20;
+            font-weight: 600;
+        }
+
+        /* BOTÃO DE IMPRIMIR (NÃO APARECE NO PAPEL) */
+        .barra-botoes {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 2px solid #2e7d32;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 280px;
+        }
+
+        .barra-botoes label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #1b5e20;
+        }
+
+        .barra-botoes input {
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .btn-acao {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-acao:hover {
+            background-color: #1b5e20;
+        }
+
+        @media print {
+            .barra-botoes {
+                display: none !important;
+            }
+            body {
+                background: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAINEL RÁPIDO PARA COLOCAR O SEU LINK E IMPRIMIR -->
+    <div class="barra-botoes">
+        <label for="input-url">1. Cole o link do seu GitHub Pages:</label>
+        <input type="text" id="input-url" placeholder="https://seu-usuario.github.io/..." oninput="atualizarQR()">
+        <button class="btn-acao" onclick="window.print()">🖨️ 2. Imprimir / Salvar PDF</button>
+    </div>
+
+    <!-- PÁGINA A4 DO CARTAZ -->
+    <div class="folha-a4">
+        
+        <header class="header-cartaz">
+            <h1>♻️ MISSÃO E-LIXO</h1>
+            <p>Tecnologia tem destino certo! Descubra onde levar seus eletrônicos sem uso em Campanário, Diadema e região.</p>
+        </header>
+
+        <!-- ÁREA INTERATIVA COM A TEKA E O QR CODE -->
+        <section class="destaque-central">
+            <div class="teka-coluna">
+                <img src="teka.jpeg" alt="Mascote Teka">
+                <span class="badge-teka">👧 Guia Ecológica Teka</span>
+            </div>
+
+            <div class="chamada-coluna">
+                <span class="tag-jogo">🎮 INCLUI MINIJOGO!</span>
+                <h2>Teste seus conhecimentos com a Teka!</h2>
+                <p>Aponte a câmera do celular para o QR Code ao lado, divirta-se no <strong>Desafio das Lixeiras</strong> e veja no mapa o ponto de coleta mais perto de você!</p>
+            </div>
+
+            <div class="qr-coluna">
+                <!-- QR CODE GERADO AUTOMATICAMENTE -->
+                <img id="img-qrcode" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://github.com" alt="QR Code do Site">
+                <span>APONTE A CÂMERA E JOGUE AGORA!</span>
+                <p class="aviso-criancas">Crianças: acessem com um adulto.</p>
+            </div>
+        </section>
+
+        <!-- LISTA DE PONTOS DE COLETA -->
+        <section class="secao-locais">
+            <h2 class="titulo-locais">📍 ALGUMAS OPÇÕES PRÓXIMAS NA REGIÃO</h2>
+            <div class="grid-locais">
+                <div class="card-local">
+                    <h3>🏥 UBS Taboão</h3>
+                    <p>Av. do Taboão, 4311 — São Bernardo do Campo</p>
+                </div>
+                <div class="card-local">
+                    <h3>🏬 Magazine Luiza</h3>
+                    <p>Rua Manoel da Nóbrega, 712 — Diadema</p>
+                </div>
+                <div class="card-local">
+                    <h3>🛠️ Sodimac Dicico</h3>
+                    <p>Av. Piraporinha, 50 — Diadema</p>
+                </div>
+                <div class="card-local">
+                    <h3>🛒 Carrefour Diadema</h3>
+                    <p>Av. Presidente Kennedy, 635 — Diadema</p>
+                </div>
+                <div class="card-local">
+                    <h3>🛒 COOP Diadema</h3>
+                    <p>Av. Sete de Setembro, 200 — Diadema</p>
+                </div>
+                <div class="card-local">
+                    <h3>🛒 Carrefour Pauliceia</h3>
+                    <p>Av. Taboão, 2000 — São Bernardo do Campo</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- RODAPÉ -->
+        <footer class="rodape-cartaz">
+            <div class="aviso-rodape">
+                <strong>Importante:</strong> Antes de ir, confirme horário, tipo de aparelho e espaço no coletor. Não desmonte eletrônicos. A escola divulga o guia; não é um ponto de coleta anunciado por este cartaz.
+            </div>
+            <p class="creditos-finais">
+                Fonte: abree.org.br/pontos-de-recebimento | Consulta: 16/09/2026<br>
+                Caroline de Santana | Análise e Desenvolvimento de Sistemas | 2026
+            </p>
+        </footer>
+
+    </div>
+
+    <script>
+        function atualizarQR() {
+            const link = document.getElementById('input-url').value.trim();
+            const qrImg = document.getElementById('img-qrcode');
+            if (link !== "") {
+                qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" + encodeURIComponent(link);
+            }
+        }
+    </script>
+</body>
+</html>
