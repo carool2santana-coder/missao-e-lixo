@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Vídeo: Missão E-Lixo com a Teka</title>
+  <style>
+    .video-container {
+      max-width: 800px;
+      margin: 20px auto;
+      background: linear-gradient(135deg, #e8f5e9 0%, #fffde7 100%);
+      border: 6px solid #4caf50;
+      border-radius: 24px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      position: relative;
+    }
+
+    .scene-screen {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 30px;
+      min-height: 380px;
+      position: relative;
+    }
+
+    /* Personagem Teka Animada */
+    .teka-wrapper {
+      flex: 1;
+      text-align: center;
+      animation: floatTeka 3s ease-in-out infinite;
+    }
+
+    .teka-wrapper img {
+      max-width: 260px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(76, 175, 80, 0.2);
+      border: 4px solid #fff;
+    }
+
+    @keyframes floatTeka {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Balão de Fala e Explicação */
+    .dialogue-box {
+      flex: 1.4;
+      background: #ffffff;
+      border: 3px solid #81c784;
+      border-radius: 20px;
+      padding: 25px;
+      margin-left: 25px;
+      position: relative;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+      transition: all 0.4s ease;
+    }
+
+    .dialogue-box::before {
+      content: "";
+      position: absolute;
+      left: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-width: 12px 20px 12px 0;
+      border-style: solid;
+      border-color: transparent #81c784 transparent transparent;
+    }
+
+    .scene-badge {
+      display: inline-block;
+      background: #ff7043;
+      color: #fff;
+      padding: 5px 14px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .scene-title {
+      color: #2e7d32;
+      font-size: 1.5rem;
+      margin: 0 0 12px 0;
+    }
+
+    .scene-text {
+      color: #37474f;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .scene-icons {
+      font-size: 2rem;
+      background: #f1f8e9;
+      padding: 10px 15px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+
+    /* Controles de Vídeo */
+    .video-controls {
+      background: #2e7d32;
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+    }
+
+    .btn-control {
+      background: #ffca28;
+      color: #1b5e20;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .btn-control:hover {
+      background: #ffd54f;
+      transform: scale(1.05);
+    }
+
+    .progress-bar-container {
+      flex: 1;
+      height: 10px;
+      background: rgba(255,255,255,0.3);
+      border-radius: 5px;
+      margin: 0 20px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #ffca28;
+      width: 12.5%;
+      transition: width 0.4s ease;
+    }
+
+    @media (max-width: 650px) {
+      .scene-screen { flex-direction: column; text-align: center; }
+      .dialogue-box { margin-left: 0; margin-top: 20px; }
+      .dialogue-box::before { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="video-container">
+  <div class="scene-screen">
+    <div class="teka-wrapper">
+      <!-- Certifique-se de que a foto teka.jpeg está na mesma pasta -->
+      <img src="teka.jpeg" alt="Teka segurando caixa de reciclagem com eletrônicos">
+    </div>
+    
+    <div class="dialogue-box" id="dialogueBox">
+      <span class="scene-badge" id="sceneBadge">Cena 1 de 8</span>
+      <h2 class="scene-title" id="sceneTitle">Oi! Eu sou a Teka!</h2>
+      <p class="scene-text" id="sceneText">
+        Eu adoro tecnologia! Uso todos os dias para estudar, pesquisar no computador, ouvir música, jogar e criar desenhos incríveis!
+      </p>
+      <div class="scene-icons" id="sceneIcons">💻 🎵 🎮 🎨</div>
+    </div>
+  </div>
+
+  <div class="video-controls">
+    <button class="btn-control" onclick="prevScene()">⏮ Anterior</button>
+    <button class="btn-control" id="playPauseBtn" onclick="togglePlay()">▶ Reproduzir Vídeo</button>
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <button class="btn-control" onclick="nextScene()">Próximo ⏭</button>
+  </div>
+</div>
+
+<script>
+  const scenes = [
+    {
+      badge: "Cena 1 de 8 • Apresentação",
+      title: "Oi! Eu sou a Teka!",
+      text: "Eu adoro tecnologia! Uso todos os dias para estudar, pesquisar na internet, ouvir música, jogar e criar projetos super legais!",
+      icons: "💻 🌐 🎵 🎮"
+    },
+    {
+      badge: "Cena 2 de 8 • O Problema",
+      title: "Ops! Meu celular quebrou...",
+      text: "Celular, fone, televisão, teclado, carregadores... A tecnologia está por toda parte, mas ela não dura para sempre. Meu aparelho parou de funcionar. E agora?",
+      icons: "📱💥 🎧 🔌 😢"
+    },
+    {
+      badge: "Cena 3 de 8 • A Dúvida",
+      title: "Posso jogar no lixo comum?",
+      text: "Eu quase joguei na lixeira normal de casa, mas parei para pensar! Foi aí que descobri o que é o Lixo Eletrônico (ou E-Lixo): todo aparelho ou cabo que quebrou ou não usamos mais.",
+      icons: "🗑️❌ 🤔 💡"
+    },
+    {
+      badge: "Cena 4 de 8 • A Descoberta",
+      title: "Por que NÃO vai no lixo comum?",
+      text: "Eu descobri 3 motivos muito sérios: 1) Pode contaminar o solo e a água; 2) Pilhas e baterias precisam de cuidado especial; 3) Muitas peças podem ser reaproveitadas!",
+      icons: "🌱💧 🔋⚠️ ♻️"
+    },
+    {
+      badge: "Cena 5 de 8 • Saúde e Planeta",
+      title: "Ambiente e saúde conectados!",
+      text: "Quando não jogamos eletrônicos no lixo comum, geramos menos contaminação, mais reaproveitamento de materiais e protegemos a saúde das pessoas e do planeta!",
+      icons: "🌍💚 🏥 🛡️"
+    },
+    {
+      badge: "Cena 6 de 8 • A Solução",
+      title: "Os 4 Caminhos que eu encontrei!",
+      text: "Antes de jogar fora, siga os 4 caminhos: 1) REUTILIZAR se ainda funciona; 2) CONSERTAR se tiver reparo; 3) DOAR para quem precisa; 4) DESCARTAR CERTO quando não tiver mais jeito!",
+      icons: "🔄 🛠️ 🎁 ✅"
+    },
+    {
+      badge: "Cena 7 de 8 • Onde Levar?",
+      title: "Onde levar o Lixo Eletrônico?",
+      text: "Peça sempre ajuda a um adulto! Vocês podem levar a um Ponto de Coleta (Ecoponto) ou entregar em lojas e fabricantes que recolhem. E cuidado: nunca abra pilhas ou baterias!",
+      icons: "📍🏪 👨‍👩‍👧 ⚠️"
+    },
+    {
+      badge: "Cena 8 de 8 • Conclusão",
+      title: "Pequenas atitudes, grandes mudanças!",
+      text: "Cuidar dos nossos aparelhos por mais tempo e dar o destino certo é pensar no nosso futuro. Agora você já sabe tudo! Que tal testar seus conhecimentos no jogo aqui do site?",
+      icons: "🚀🌟 🏆 🌱"
+    }
+  ];
+
+  let currentScene = 0;
+  let isPlaying = false;
+  let playInterval = null;
+
+  function updateScene() {
+    const s = scenes[currentScene];
+    document.getElementById("sceneBadge").innerText = s.badge;
+    document.getElementById("sceneTitle").innerText = s.title;
+    document.getElementById("sceneText").innerText = s.text;
+    document.getElementById("sceneIcons").innerText = s.icons;
+    
+    const progress = ((currentScene + 1) / scenes.length) * 100;
+    document.getElementById("progressBar").style.width = progress + "%";
+
+    // Usa síntese de voz do navegador (opcional, fala com o usuário!)
+    if (isPlaying && 'speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(s.title + ". " + s.text);
+      utterance.lang = 'pt-BR';
+      utterance.rate = 1.05;
+      window.speechSynthesis.speak(utterance);
+    }
+  }
+
+  function nextScene() {
+    currentScene = (currentScene + 1) % scenes.length;
+    updateScene();
+  }
+
+  function prevScene() {
+    currentScene = (currentScene - 1 + scenes.length) % scenes.length;
+    updateScene();
+  }
+
+  function togglePlay() {
+    const btn = document.getElementById("playPauseBtn");
+    if (isPlaying) {
+      isPlaying = false;
+      clearInterval(playInterval);
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      btn.innerText = "▶ Reproduzir Vídeo";
+    } else {
+      isPlaying = true;
+      btn.innerText = "⏸ Pausar";
+      updateScene();
+      playInterval = setInterval(() => {
+        if (currentScene < scenes.length - 1) {
+          currentScene++;
+          updateScene();
+        } else {
+          togglePlay(); // Para no final
+        }
+      }, 9000); // Troca de cena a cada 9 segundos
+    }
+  }
+</script>
+
+</body>
+</html>

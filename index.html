@@ -18,12 +18,17 @@
             <span class="badge-topo">🌱 Projeto Educativo de Sustentabilidade</span>
             <h1>♻️ Missão E-Lixo</h1>
             <p>Junte-se à <strong>Teka</strong> para proteger a natureza e aprender a descartar seus eletrônicos do jeito certo!</p>
+            <div class="hero-atalhos">
+                <a href="#secao-video" class="btn-atalho">🎬 Assistir à Teka</a>
+                <a href="#secao-desafio" class="btn-atalho">🎮 Jogar Desafio</a>
+                <a href="#secao-pontos" class="btn-atalho btn-atalho-destaque">📍 Pontos de Coleta</a>
+            </div>
         </div>
     </header>
 
     <main class="container">
 
-        <!-- DESTAQUE DA TEKA -->
+        <!-- DESTAQUE DA TEKA E CARDS EXPLICATIVOS -->
         <section class="card-section teka-hero-card">
             <div class="teka-apresentacao">
                 <div class="teka-img-frame">
@@ -58,28 +63,82 @@
             </div>
         </section>
 
-        <!-- MINI-JOGO INTERATIVO DA TEKA -->
-        <section class="card-section jogo-section">
+        <!-- VÍDEO ANIMADO E FALADO DA TEKA (SEM MARCAÇÃO DE CENAS E COM ANIMAÇÃO DE PASSOS/FALA) -->
+        <section class="card-section video-section" id="secao-video">
+            <div class="video-header">
+                <span class="badge-video">🎬 Historieta Animada</span>
+                <h2>Assista e Ouça: A Descoberta da Teka!</h2>
+                <p>Aperte o <strong>Play</strong> para ver a Teka caminhar pelo cenário e contar como proteger o nosso planeta!</p>
+            </div>
+
+            <div class="video-container">
+                <div class="scene-screen" id="sceneStage">
+                    <!-- Personagem Teka com animações de andar e falar -->
+                    <div class="teka-wrapper teka-idle" id="tekaVideoAvatar">
+                        <div class="teka-character-box" id="tekaCharBox">
+                            <img src="teka.jpeg" alt="Teka segurando caixa de reciclagem com eletrônicos">
+                            <!-- Ondas de voz animadas quando ela fala -->
+                            <div class="ondas-fala escondido" id="speakingWaves">
+                                <span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <div class="sombra-chao" id="tekaShadow"></div>
+                    </div>
+                    
+                    <!-- Balão de Fala limpo (sem 'Cena 1 de 8') -->
+                    <div class="dialogue-box" id="dialogueBox">
+                        <div class="dialogue-top-bar">
+                            <button class="btn-listen-scene" onclick="falarCenaAtual()" title="Ouvir a Teka falar">🔈 Ouvir a Teka</button>
+                        </div>
+                        <h3 class="scene-title" id="sceneTitle">Oi, galerinha! Eu sou a Teka!</h3>
+                        <p class="scene-text" id="sceneText">
+                            Eu adoro tecnologia! Uso todos os dias para estudar, pesquisar na internet, ouvir música, jogar e criar desenhos super legais! E vocês, também gostam?
+                        </p>
+                        <div class="scene-icons emoji-render" id="sceneIcons">💻 🌐 🎵 🎮</div>
+                    </div>
+                </div>
+
+                <div class="video-controls">
+                    <button class="btn-control" onclick="prevScene()">⏮ Voltar</button>
+                    <button class="btn-control btn-play-main" id="playPauseBtn" onclick="togglePlay()">▶ Dar Play na História</button>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <button class="btn-control" onclick="nextScene()">Avançar ⏭</button>
+                    <button class="btn-control btn-mute" id="muteBtn" onclick="toggleMute()" title="Ativar/Desativar som">🔊 Som Ativo</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- MINI-JOGO INTERATIVO DA TEKA (COM FOTOS REAIS + CERTIFICADO) -->
+        <section class="card-section jogo-section" id="secao-desafio">
             <div class="jogo-header">
                 <span class="badge-game">🎮 Desafio Interativo</span>
                 <h2>O Desafio da Teka: Qual é a Lixeira Certa?</h2>
-                <p>Observe o cartão e clique na lixeira correta para ajudar no descarte!</p>
+                <p>Complete os 15 itens para ganhar o seu <strong>Certificado de Defensor(a) da Natureza</strong>!</p>
+                <div class="placar-progresso" id="placar-box">
+                    🌟 Item <span id="contador-atual">1</span> de <span id="contador-total">15</span>
+                </div>
             </div>
 
-            <div class="area-jogo">
+            <!-- ÁREA DE JOGO ATIVA -->
+            <div class="area-jogo" id="area-jogo-ativa">
                 
                 <!-- GUIA TEKA NO JOGO -->
                 <div class="teka-guia-jogo">
                     <img src="teka.jpeg" alt="Teka ajudando no jogo" class="teka-avatar-jogo">
                     <div class="balao-jogo">
-                        <p><strong>Dica da Teka:</strong> "Olhe bem o item no cartão e clique na lixeira da cor correspondente!"</p>
+                        <p id="fala-teka-jogo"><strong>Dica da Teka:</strong> "Olhe bem a foto no cartão e clique na lixeira da cor correspondente!"</p>
                     </div>
                 </div>
 
-                <!-- CARTÃO ILUSTRADO DO DESAFIO -->
+                <!-- CARTÃO COM FOTO REAL DO DESAFIO -->
                 <div class="cartao-desafio" id="cartao-anima">
                     <div class="cartao-tag">Item para Descarte</div>
-                    <div id="icone-item" class="icone-gigante emoji-render">📱</div>
+                    <div class="foto-item-wrapper">
+                        <img id="foto-item" src="" alt="Item para descarte" onerror="mostrarFallbackEmoji()">
+                        <div id="icone-item" class="icone-gigante emoji-render escondido">📱</div>
+                    </div>
                     <div id="nome-item" class="nome-desafio">Carregando...</div>
                 </div>
 
@@ -118,13 +177,56 @@
 
                 <div id="feedback-jogo" class="escondido"></div>
             </div>
+
+            <!-- TELA DE CERTIFICADO FINAL (APARECE AO COMPLETAR OS 15 ITENS) -->
+            <div id="tela-certificado" class="certificado-wrapper escondido">
+                <div class="input-nome-box nao-imprimir">
+                    <label for="input-nome-crianca">🎉 Parabéns! Digite seu nome para colocar no certificado:</label>
+                    <input type="text" id="input-nome-crianca" placeholder="Escreva seu nome aqui..." oninput="atualizarNomeCertificado(this.value)" maxlength="40">
+                </div>
+
+                <div class="certificado-card" id="certificado-imprimivel">
+                    <div class="certificado-borda-interna">
+                        <div class="certificado-medalha emoji-render">🏆🌱</div>
+                        <span class="certificado-subtitulo">PROJETO EDUCATIVO MISSÃO E-LIXO</span>
+                        <h3 class="certificado-titulo">Certificado de Defensor(a) da Natureza</h3>
+                        
+                        <p class="certificado-texto-intro">A <strong>Teka</strong> certifica com muito orgulho que</p>
+                        <div class="certificado-nome-destaque" id="nome-no-certificado">Super Guardião(ã) do Planeta</div>
+                        
+                        <p class="certificado-descricao">
+                            completou com sucesso todos os <strong>15 desafios de descarte consciente</strong>, aprendendo a separar o <strong>Lixo Eletrônico</strong>, proteger a água, o solo e cuidar da saúde de todos!
+                        </p>
+
+                        <div class="certificado-rodape">
+                            <div class="certificado-assinatura-bloco">
+                                <img src="teka.jpeg" alt="Teka" class="certificado-avatar-teka">
+                                <div>
+                                    <div class="linha-assinatura">Teka • Guia Ecológica</div>
+                                    <small id="data-certificado">Missão Cumprida!</small>
+                                </div>
+                            </div>
+                            <div class="selo-oficial">
+                                <span class="emoji-render">♻️</span>
+                                <span>AMIGO(A) DO<br>PLANETA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certificado-acoes nao-imprimir">
+                    <button class="btn-certificado btn-imprimir" onclick="imprimirCertificado()">🖨️ Imprimir / Salvar Certificado</button>
+                    <button class="btn-certificado btn-reiniciar" onclick="reiniciarJogo()">🔄 Jogar Novamente</button>
+                </div>
+            </div>
         </section>
 
-        <!-- MAPA E PONTOS DE COLETA -->
-        <section class="card-section pontos-section">
+        <!-- MAPA E PONTOS DE COLETA EM DIADEMA E REGIÃO -->
+        <section class="card-section pontos-section" id="secao-pontos">
             <div class="pontos-header">
-                <h2>📍 Onde Descartar em Diadema e Região</h2>
-                <p>A Teka ajuda você e sua família a encontrarem o ponto de coleta mais próximo:</p>
+                <span class="badge-pontos">📍 Guia Prático de Descarte</span>
+                <h2>Onde Descartar em Diadema e Região</h2>
+                <p>A Teka ajuda você e sua família a encontrarem o ponto de coleta mais próximo para levar seus eletrônicos:</p>
             </div>
 
             <div class="pontos-grid">
@@ -134,7 +236,7 @@
                         <h3>Carrefour Diadema</h3>
                         <p>Av. Presidente Kennedy, 635 - Diadema</p>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Av+Presidente+Kennedy,+635+-+Diadema+-+SP" target="_blank" class="btn-maps">📍 Como Chegar</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Av+Presidente+Kennedy,+635+-+Diadema+-+SP" target="_blank" class="btn-maps">📍 Como Chegar no Mapa</a>
                 </div>
 
                 <div class="ponto-card">
@@ -143,7 +245,7 @@
                         <h3>COOP Diadema</h3>
                         <p>Av. Sete de Setembro, 200 - Diadema</p>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Av.+Sete+de+Setembro,+200+-+Diadema+-+SP" target="_blank" class="btn-maps">📍 Como Chegar</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Av.+Sete+de+Setembro,+200+-+Diadema+-+SP" target="_blank" class="btn-maps">📍 Como Chegar no Mapa</a>
                 </div>
 
                 <div class="ponto-card">
@@ -152,16 +254,16 @@
                         <h3>Magazine Luiza</h3>
                         <p>Rua Manoel da Nóbrega, 712 - Diadema</p>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Rua+Manoel+da+Nobrega,+712+-+Diadema+-+SP" target="_blank" class="btn-maps">📍 Como Chegar</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Rua+Manoel+da+Nobrega,+712+-+Diadema+-+SP" target="_blank" class="btn-maps">📍 Como Chegar no Mapa</a>
                 </div>
 
                 <div class="ponto-card">
                     <div class="ponto-icon emoji-render">🛠️</div>
                     <div class="ponto-info">
-                        <h3>Soudimac Dicico</h3>
+                        <h3>Sodimac Dicico</h3>
                         <p>Av. Piraporinha, 50 - Diadema</p>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Av.+Piraporinha,+50+-+Diadema+-+SP" target="_blank" class="btn-maps">📍 Como Chegar</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Av.+Piraporinha,+50+-+Diadema+-+SP" target="_blank" class="btn-maps">📍 Como Chegar no Mapa</a>
                 </div>
 
                 <div class="ponto-card">
@@ -170,7 +272,7 @@
                         <h3>UBS Taboão</h3>
                         <p>Av. do Taboão, 4311 - São Bernardo</p>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Av.+do+Tabo%C3%A3o,+4311+-+S%C3%A3o+Bernardo+do+Campo+-+SP" target="_blank" class="btn-maps">📍 Como Chegar</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Av.+do+Tabo%C3%A3o,+4311+-+S%C3%A3o+Bernardo+do+Campo+-+SP" target="_blank" class="btn-maps">📍 Como Chegar no Mapa</a>
                 </div>
 
                 <div class="ponto-card">
@@ -179,7 +281,7 @@
                         <h3>Carrefour Pauliceia</h3>
                         <p>Av. Taboão, 2000 - São Bernardo</p>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Av+Tabo%C3%A3o,+2000+-+S%C3%A3o+Bernardo+do+Campo+-+SP" target="_blank" class="btn-maps">📍 Como Chegar</a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Av+Tabo%C3%A3o,+2000+-+S%C3%A3o+Bernardo+do+Campo+-+SP" target="_blank" class="btn-maps">📍 Como Chegar no Mapa</a>
                 </div>
             </div>
 
