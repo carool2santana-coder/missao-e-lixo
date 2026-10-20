@@ -63,54 +63,52 @@
             </div>
         </section>
 
-        <!-- VÍDEO ANIMADO E FALADO DA TEKA (SEM MARCAÇÃO DE CENAS E COM ANIMAÇÃO DE PASSOS/FALA) -->
+        <!-- VÍDEO ANIMADO E FALADO DA TEKA -->
         <section class="card-section video-section" id="secao-video">
             <div class="video-header">
                 <span class="badge-video">🎬 Historieta Animada</span>
                 <h2>Assista e Ouça: A Descoberta da Teka!</h2>
-                <p>Aperte o <strong>Play</strong> para ver a Teka caminhar pelo cenário e contar como proteger o nosso planeta!</p>
+                <p>Clique na tela abaixo para assistir à Teka explicando cada situação!</p>
             </div>
 
-            <div class="video-container">
+            <div class="video-container cenario-1" id="videoContainer" onclick="clicarPalcoVideo()">
+                
+                <!-- Imagem da Cena Criada no Canva (100% fixa e nítida, sem mexer) -->
+                <img id="cenarioBgImg" class="cenario-bg-custom escondido" src="" alt="Cenário da Teka no Canva">
+
+                <!-- Tela de Capa para Começar o Vídeo (Some quando dá Play) -->
+                <div class="video-overlay-play" id="videoOverlay">
+                    <button class="btn-big-play" onclick="iniciarOuPausarVideo(event)">
+                        ▶ Assistir História da Teka
+                    </button>
+                    <span class="dica-clique-video">Clique para ouvir e assistir automaticamente</span>
+                </div>
+
                 <div class="scene-screen" id="sceneStage">
-                    <!-- Personagem Teka com animações de andar e falar -->
-                    <div class="teka-wrapper teka-idle" id="tekaVideoAvatar">
-                        <div class="teka-character-box" id="tekaCharBox">
-                            <img src="teka.jpeg" alt="Teka segurando caixa de reciclagem com eletrônicos">
-                            <!-- Ondas de voz animadas quando ela fala -->
-                            <div class="ondas-fala escondido" id="speakingWaves">
-                                <span></span><span></span><span></span><span></span>
-                            </div>
+                    <!-- Espaço livre à esquerda para enxergar a Teka do cenário sem obstruções -->
+                    <div class="teka-area-livre" id="tekaVideoAvatar">
+                        <div class="ondas-fala escondido" id="speakingWaves">
+                            <span></span><span></span><span></span><span></span>
                         </div>
-                        <div class="sombra-chao" id="tekaShadow"></div>
                     </div>
                     
-                    <!-- Balão de Fala limpo (sem 'Cena 1 de 8') -->
+                    <!-- Balão de Fala da Teka (Menor, sem emojis e com Título + Texto aparecendo juntos) -->
                     <div class="dialogue-box" id="dialogueBox">
-                        <div class="dialogue-top-bar">
-                            <button class="btn-listen-scene" onclick="falarCenaAtual()" title="Ouvir a Teka falar">🔈 Ouvir a Teka</button>
-                        </div>
                         <h3 class="scene-title" id="sceneTitle">Oi, galerinha! Eu sou a Teka!</h3>
                         <p class="scene-text" id="sceneText">
                             Eu adoro tecnologia! Uso todos os dias para estudar, pesquisar na internet, ouvir música, jogar e criar desenhos super legais! E vocês, também gostam?
                         </p>
-                        <div class="scene-icons emoji-render" id="sceneIcons">💻 🌐 🎵 🎮</div>
                     </div>
                 </div>
 
-                <div class="video-controls">
-                    <button class="btn-control" onclick="prevScene()">⏮ Voltar</button>
-                    <button class="btn-control btn-play-main" id="playPauseBtn" onclick="togglePlay()">▶ Dar Play na História</button>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" id="progressBar"></div>
-                    </div>
-                    <button class="btn-control" onclick="nextScene()">Avançar ⏭</button>
-                    <button class="btn-control btn-mute" id="muteBtn" onclick="toggleMute()" title="Ativar/Desativar som">🔊 Som Ativo</button>
+                <!-- Barra fina de progresso automática na base do vídeo -->
+                <div class="barra-progresso-limpa">
+                    <div class="progress-bar" id="progressBar"></div>
                 </div>
             </div>
         </section>
 
-        <!-- MINI-JOGO INTERATIVO DA TEKA (COM FOTOS REAIS + CERTIFICADO) -->
+        <!-- MINI-JOGO INTERATIVO DA TEKA (SUPORTE A .JFIF + ÁUDIOS DA VOZ DA TEKA + CERTIFICADO) -->
         <section class="card-section jogo-section" id="secao-desafio">
             <div class="jogo-header">
                 <span class="badge-game">🎮 Desafio Interativo</span>
@@ -124,15 +122,15 @@
             <!-- ÁREA DE JOGO ATIVA -->
             <div class="area-jogo" id="area-jogo-ativa">
                 
-                <!-- GUIA TEKA NO JOGO -->
-                <div class="teka-guia-jogo">
-                    <img src="teka.jpeg" alt="Teka ajudando no jogo" class="teka-avatar-jogo">
+                <!-- GUIA TEKA NO JOGO (SE ANIMA QUANDO FALA ACERTO OU ERRO) -->
+                <div class="teka-guia-jogo" id="tekaGuiaJogoBox">
+                    <img src="teka.jpeg" alt="Teka ajudando no jogo" class="teka-avatar-jogo" id="tekaAvatarJogoImg">
                     <div class="balao-jogo">
                         <p id="fala-teka-jogo"><strong>Dica da Teka:</strong> "Olhe bem a foto no cartão e clique na lixeira da cor correspondente!"</p>
                     </div>
                 </div>
 
-                <!-- CARTÃO COM FOTO REAL DO DESAFIO -->
+                <!-- CARTÃO COM FOTO REAL DO DESAFIO (.JFIF, .JPG, .PNG) -->
                 <div class="cartao-desafio" id="cartao-anima">
                     <div class="cartao-tag">Item para Descarte</div>
                     <div class="foto-item-wrapper">
