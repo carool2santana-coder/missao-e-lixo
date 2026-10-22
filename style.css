@@ -1,9 +1,7 @@
-/* ROLAGEM SUAVE PARA OS ATALHOS DO TOPO */
 html {
     scroll-behavior: smooth;
 }
 
-/* FUNDO UTILIZANDO A IMAGEM TECA2.JPEG */
 body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
@@ -16,8 +14,7 @@ body {
     padding: 0;
 }
 
-/* RENDERIZAÇÃO COMPATÍVEL DE EMOJIS NAS DEMAIS SEÇÕES DO SITE */
-.emoji-render, .icone-gigante, .emoji-lixeira, .icon-header, .ponto-icon, .dica-icon {
+.emoji-render, .icone-gigante, .emoji-lixeira, .icon-header, .ponto-icon, .dica-icon, .aviso-icon {
     font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif !important;
     display: inline-block;
     line-height: 1.1;
@@ -27,7 +24,6 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
     font-family: 'Fredoka', cursive, sans-serif;
 }
 
-/* HERO HEADER */
 .hero {
     position: relative;
     background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #43a047 100%);
@@ -120,7 +116,6 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
     border: 2px solid #c8e6c9;
 }
 
-/* APRESENTAÇÃO DA TEKA */
 .teka-apresentacao {
     display: flex;
     align-items: center;
@@ -173,7 +168,6 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
     font-weight: 500;
 }
 
-/* CARDS EXPLICATIVOS */
 .explicacao-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -210,9 +204,6 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
 .box-solucao { border: 2px solid #c8e6c9; background-color: #e8f5e9; }
 .box-solucao h3 { color: #1b5e20; }
 
-/* ========================================================
-   SEÇÃO DO VÍDEO DA TEKA (CENÁRIO FIXO, SEM ROBOZINHO, BALÃO MENOR)
-   ======================================================== */
 .video-section {
     text-align: center;
     border: 3px solid #81c784;
@@ -235,201 +226,78 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
     margin-bottom: 6px;
 }
 
-.video-container {
+.slide-palco-wrapper {
     max-width: 850px;
     margin: 25px auto 0 auto;
     border: 5px solid #4caf50;
     border-radius: 24px;
     box-shadow: 0 12px 28px rgba(0,0,0,0.14);
     overflow: hidden;
-    position: relative;
-    text-align: left;
-    cursor: pointer;
-    transition: background 0.8s ease;
-    background-size: cover;
-    background-position: center;
-}
-
-/* Cenário do Canva 100% parado, sem tremer e sem recortes */
-.cenario-bg-custom {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: left center;
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* Fundos padrão caso alguma imagem não carregue */
-.video-container.cenario-1 { background: linear-gradient(180deg, #dff9fb 0%, #c7ecee 70%, #badc58 70%, #6ab04c 100%); }
-.video-container.cenario-2 { background: linear-gradient(180deg, #fff3e0 0%, #ffe0b2 70%, #d7ccc8 70%, #a1887f 100%); }
-.video-container.cenario-3 { background: linear-gradient(180deg, #fffde7 0%, #fff9c4 70%, #c8e6c9 70%, #81c784 100%); }
-.video-container.cenario-4 { background: linear-gradient(180deg, #ffebee 0%, #ffcdd2 70%, #bcaaa4 70%, #8d6e63 100%); }
-.video-container.cenario-5 { background: linear-gradient(180deg, #e0f7fa 0%, #b2ebf2 70%, #a5d6a7 70%, #4caf50 100%); }
-.video-container.cenario-6 { background: linear-gradient(180deg, #f3e5f5 0%, #e1bee7 70%, #aed581 70%, #7cb342 100%); }
-.video-container.cenario-7 { background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 70%, #cfd8dc 70%, #90a4ae 100%); }
-.video-container.cenario-8 { background: linear-gradient(180deg, #fff8e1 0%, #ffecb3 70%, #81c784 70%, #2e7d32 100%); }
-
-/* Overlay de Play Inicial */
-.video-overlay-play {
-    position: absolute;
-    inset: 0;
-    background: rgba(27, 94, 32, 0.35);
-    backdrop-filter: blur(2px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    transition: opacity 0.35s ease;
-}
-
-.btn-big-play {
-    background: #ffa502;
-    color: #1e272e;
-    border: 4px solid #ffffff;
-    padding: 16px 32px;
-    border-radius: 50px;
-    font-family: 'Fredoka', cursive, sans-serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.btn-big-play:hover {
-    background: #ffca28;
-    transform: scale(1.06);
-}
-
-.dica-clique-video {
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.45);
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    margin-top: 10px;
-    font-weight: 500;
-}
-
-.scene-screen {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 30px 25px 25px 25px;
-    min-height: 360px;
-    position: relative;
-    z-index: 2;
-    box-sizing: border-box;
-}
-
-/* Área livre à esquerda para enxergar a Teka do cenário sem obstruções */
-.teka-area-livre {
-    flex: 1;
-    min-height: 260px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    position: relative;
-}
-
-/* Indicador discreto de ondas sonoras (sem emojis) */
-.ondas-fala {
-    background: #ff4757;
-    padding: 6px 14px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.4);
-    border: 2px solid #ffffff;
-    margin-bottom: 5px;
-}
-
-.ondas-fala span {
-    display: inline-block;
-    width: 4px;
-    height: 11px;
     background: #ffffff;
-    border-radius: 2px;
-    animation: ondaSom 0.4s ease-in-out infinite alternate;
+    line-height: 0;
 }
 
-.ondas-fala span:nth-child(2) { animation-delay: 0.15s; height: 15px; }
-.ondas-fala span:nth-child(3) { animation-delay: 0.3s; height: 9px; }
-.ondas-fala span:nth-child(4) { animation-delay: 0.1s; height: 13px; }
-
-@keyframes ondaSom {
-    from { transform: scaleY(0.35); }
-    to   { transform: scaleY(1.25); }
+.slide-img-firme {
+    width: 100%;
+    height: auto;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
-/* BALÃO DE FALA REDUZIDO, COMPACTO E SEM EMOJIS */
-.dialogue-box {
-    flex: 0.95;
-    max-width: 350px;
-    background: rgba(255, 255, 255, 0.96);
-    border: 3px solid #4caf50;
-    border-radius: 18px;
-    padding: 16px 20px;
-    margin-left: 15px;
-    position: relative;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.14);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    box-sizing: border-box;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-}
-
-.dialogue-box::before {
-    content: "";
-    position: absolute;
-    left: -14px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-width: 9px 14px 9px 0;
-    border-style: solid;
-    border-color: transparent #4caf50 transparent transparent;
-}
-
-.scene-title {
-    color: #2e7d32;
-    font-size: 1.18rem;
-    line-height: 1.25;
-    margin: 0 0 6px 0;
-}
-
-.scene-text {
-    color: #37474f;
-    font-size: 0.94rem;
-    line-height: 1.5;
-    margin: 0;
-    min-height: 4.5em;
-}
-
-/* Barra fina automática na base do vídeo */
 .barra-progresso-limpa {
     width: 100%;
     height: 8px;
-    background: rgba(0, 0, 0, 0.15);
+    background: #e0e0e0;
     overflow: hidden;
-    position: relative;
-    z-index: 3;
 }
 
 .progress-bar {
     height: 100%;
     background: #ffa502;
-    width: 12.5%;
-    transition: width 0.4s ease;
+    width: 10%;
+    transition: width 0.35s ease;
 }
 
-/* =========================================
-   JOGO INTERATIVO DA TEKA (COM FOTOS REAIS)
-   ========================================= */
+.controles-apresentacao {
+    max-width: 850px;
+    margin: 20px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btn-slide-nav {
+    background: #e8f5e9;
+    color: #1b5e20;
+    border: 2px solid #81c784;
+    padding: 12px 26px;
+    border-radius: 30px;
+    font-family: 'Fredoka', cursive, sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-slide-nav:hover {
+    background: #c8e6c9;
+    transform: translateY(-2px);
+}
+
+.btn-slide-destaque {
+    background: #ffa502;
+    color: #1e272e;
+    border-color: #ffa502;
+    font-weight: 700;
+}
+
+.btn-slide-destaque:hover {
+    background: #ffca28;
+}
+
 .jogo-section {
     background-color: rgba(255, 255, 255, 0.96);
     border: 3px solid #a8e6cf;
@@ -468,7 +336,6 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
     margin-top: 20px;
 }
 
-/* AVATAR GUIA DA TEKA NO JOGO */
 .teka-guia-jogo {
     display: flex;
     align-items: center;
@@ -518,7 +385,6 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
     text-align: left;
 }
 
-/* CARTÃO DE DESAFIO COM FOTO REAL */
 .cartao-desafio {
     background: #ffffff;
     border: 3px dashed #2e7d32;
@@ -576,7 +442,6 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
     margin-top: 12px;
 }
 
-/* LIXEIRAS VISUAIS 3D */
 .opcoes-lixeiras {
     display: flex;
     justify-content: center;
@@ -634,7 +499,6 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
     font-weight: 600;
 }
 
-/* CORES DAS LIXEIRAS CONAMA */
 .l-eletronico .tampa-3d, .l-eletronico .corpo-3d { background-color: #e65100; }
 .l-reciclavel .tampa-3d, .l-reciclavel .corpo-3d { background-color: #1565c0; }
 .l-organico .tampa-3d, .l-organico .corpo-3d { background-color: #5d4037; }
@@ -651,9 +515,6 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
 .sucesso { background-color: #d4edda; color: #155724; border: 2px solid #c3e6cb; }
 .erro { background-color: #f8d7da; color: #721c24; border: 2px solid #f5c6cb; }
 
-/* =========================================
-   ESTILO DO CERTIFICADO DE DEFENSOR DA NATUREZA
-   ========================================= */
 .certificado-wrapper {
     margin-top: 25px;
     animation: aparecerSuave 0.5s ease-out;
@@ -844,9 +705,6 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
     color: #1e272e;
 }
 
-/* =========================================
-   PONTOS DE COLETA EM DIADEMA E REGIÃO
-   ========================================= */
 .pontos-section {
     border: 3px solid #81c784;
 }
@@ -869,6 +727,25 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
     color: #2e7d32;
     font-size: 2.1em;
     margin: 0 0 8px 0;
+}
+
+.aviso-verificacao-materiais {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 20px;
+    background-color: #fff3e0;
+    border: 2px solid #ffb74d;
+    border-left: 6px solid #f57c00;
+    padding: 15px 20px;
+    border-radius: 14px;
+    color: #4e342e;
+    font-size: 0.96em;
+}
+
+.aviso-icon {
+    font-size: 2em;
+    flex-shrink: 0;
 }
 
 .pontos-grid {
@@ -944,7 +821,6 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
     font-size: 2.2em;
 }
 
-/* RODAPÉ */
 footer {
     text-align: center;
     padding: 35px 20px;
@@ -956,9 +832,6 @@ footer {
 footer p { margin: 4px 0; }
 .credito-autor { opacity: 0.8; font-size: 0.9em; }
 
-/* =========================================================
-   ESTILO DE IMPRESSÃO CORRIGIDO (SEM PÁGINAS EXTRAS NO PDF)
-   ========================================================= */
 @media print {
     @page {
         size: A4 landscape;
@@ -1014,16 +887,11 @@ footer p { margin: 4px 0; }
     }
 }
 
-/* RESPONSIVIDADE */
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.4em; }
     .card-section { padding: 25px 18px; }
     .teka-apresentacao { flex-direction: column; text-align: center; }
     .teka-img-frame img { width: 180px; }
-    .scene-screen { flex-direction: column; text-align: center; padding: 30px 18px 20px 18px; }
-    .teka-area-livre { min-height: 180px; }
-    .dialogue-box { margin-left: 0; margin-top: 15px; text-align: center; max-width: 100%; }
-    .dialogue-box::before { display: none; }
     .teka-guia-jogo { flex-direction: column; text-align: center; border-radius: 20px; }
     .balao-jogo p { text-align: center; }
     .opcoes-lixeiras { gap: 15px; }
@@ -1032,4 +900,5 @@ footer p { margin: 4px 0; }
     .emoji-lixeira { font-size: 2.2em; }
     .certificado-titulo { font-size: 1.6em; }
     .certificado-nome-destaque { font-size: 1.5em; min-width: auto; }
+    .aviso-verificacao-materiais { flex-direction: column; text-align: center; }
 }
