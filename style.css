@@ -24,14 +24,16 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
     font-family: 'Fredoka', cursive, sans-serif;
 }
 
+/* Topo substituído pela imagem capaindex.jpg */
 .hero {
     position: relative;
-    background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #43a047 100%);
+    background: linear-gradient(rgba(27, 94, 32, 0.65), rgba(27, 94, 32, 0.75)), url('capaindex.jpg') center/cover no-repeat;
+    background-color: #1b5e20;
     color: #ffffff;
     text-align: center;
-    padding: 55px 20px 70px 20px;
+    padding: 65px 20px 80px 20px;
     border-radius: 0 0 35px 35px;
-    box-shadow: 0 10px 25px rgba(27, 94, 32, 0.2);
+    box-shadow: 0 10px 25px rgba(27, 94, 32, 0.25);
 }
 
 .hero-content {
@@ -56,14 +58,14 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
 .hero h1 {
     font-size: 3.2em;
     margin: 0 0 10px 0;
-    text-shadow: 2px 3px 0px rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.45);
     letter-spacing: 1px;
 }
 
 .hero p {
     font-size: 1.25em;
-    font-weight: 400;
-    opacity: 0.95;
+    font-weight: 500;
+    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.45);
     margin-bottom: 22px;
 }
 
@@ -75,14 +77,15 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
 }
 
 .btn-atalho {
-    background: rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(4px);
     color: #ffffff;
     text-decoration: none;
     padding: 8px 18px;
     border-radius: 25px;
     font-weight: 600;
     font-size: 0.92em;
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.6);
     transition: all 0.2s ease;
 }
 
@@ -255,7 +258,7 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
 .progress-bar {
     height: 100%;
     background: #ffa502;
-    width: 10%;
+    width: 7.14%;
     transition: width 0.35s ease;
 }
 
@@ -703,6 +706,25 @@ h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeir
 .btn-reiniciar {
     background: #ffa502;
     color: #1e272e;
+}
+
+/* Estilo do Bloco de Encerramento */
+.encerramento-wrapper {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 3px dashed #81c784;
+    text-align: center;
+}
+
+.encerramento-wrapper h3 {
+    color: #2e7d32;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.encerramento-palco {
+    max-width: 720px;
+    margin: 0 auto 20px auto;
 }
 
 .pontos-section {

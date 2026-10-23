@@ -7,7 +7,946 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #1e272e;
+            background-image: url('teca2.jpeg');
+            background-repeat: repeat;
+            background-position: center top;
+            background-color: #e4f4e6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .emoji-render, .icone-gigante, .emoji-lixeira, .icon-header, .ponto-icon, .dica-icon, .aviso-icon {
+            font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif !important;
+            display: inline-block;
+            line-height: 1.1;
+        }
+
+        h1, h2, h3, .badge-topo, .badge-game, .badge-video, .badge-pontos, .label-lixeira, .cartao-tag, .certificado-titulo {
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+
+        /* Topo com a foto capaindex.jpg */
+        .hero {
+            position: relative;
+            background: linear-gradient(rgba(27, 94, 32, 0.65), rgba(27, 94, 32, 0.75)), url('capaindex.jpg') center/cover no-repeat;
+            background-color: #1b5e20;
+            color: #ffffff;
+            text-align: center;
+            padding: 65px 20px 80px 20px;
+            border-radius: 0 0 35px 35px;
+            box-shadow: 0 10px 25px rgba(27, 94, 32, 0.25);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .badge-topo {
+            background-color: #ffa502;
+            color: #1e272e;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .hero h1 {
+            font-size: 3.2em;
+            margin: 0 0 10px 0;
+            text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.45);
+            letter-spacing: 1px;
+        }
+
+        .hero p {
+            font-size: 1.25em;
+            font-weight: 500;
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.45);
+            margin-bottom: 22px;
+        }
+
+        .hero-atalhos {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-atalho {
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(4px);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.92em;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.2s ease;
+        }
+
+        .btn-atalho:hover {
+            background: #ffffff;
+            color: #1b5e20;
+            transform: translateY(-2px);
+        }
+
+        .btn-atalho-destaque {
+            background: #ffca28;
+            color: #1b5e20;
+            border-color: #ffca28;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: -30px auto 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .card-section {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.1);
+            border: 2px solid #c8e6c9;
+        }
+
+        .teka-apresentacao {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            background: rgba(228, 244, 230, 0.9);
+            padding: 25px;
+            border-radius: 20px;
+            border: 2px solid #a3d9b1;
+            margin-bottom: 30px;
+        }
+
+        .teka-img-frame {
+            flex-shrink: 0;
+            background-color: transparent;
+            padding: 4px;
+            border-radius: 22px;
+        }
+
+        .teka-img-frame img {
+            width: 220px;
+            height: auto;
+            display: block;
+            border-radius: 16px;
+        }
+
+        .teka-balao {
+            flex-grow: 1;
+        }
+
+        .tag-personagem {
+            background-color: #ff4757;
+            color: #ffffff;
+            font-size: 0.85em;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .teka-balao h2 {
+            color: #2e7d32;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .teka-balao p {
+            font-size: 1.15em;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .explicacao-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .explicacao-box {
+            padding: 25px;
+            border-radius: 18px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .explicacao-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .icon-header {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .explicacao-box h3 {
+            font-size: 1.3em;
+            margin-bottom: 8px;
+        }
+
+        .box-o-que-e { border: 2px solid #a5d6a7; background-color: #f1f8e9; }
+        .box-o-que-e h3 { color: #2e7d32; }
+
+        .box-perigo { border: 2px solid #ffcdd2; background-color: #fff5f5; }
+        .box-perigo h3 { color: #d32f2f; }
+
+        .box-solucao { border: 2px solid #c8e6c9; background-color: #e8f5e9; }
+        .box-solucao h3 { color: #1b5e20; }
+
+        .video-section {
+            text-align: center;
+            border: 3px solid #81c784;
+        }
+
+        .badge-video {
+            background-color: #ffa502;
+            color: #1e272e;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .video-header h2 {
+            color: #2e7d32;
+            font-size: 2.1em;
+            margin-bottom: 6px;
+        }
+
+        .indicador-slide {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #1b5e20;
+            font-weight: 700;
+            padding: 4px 16px;
+            border-radius: 20px;
+            border: 2px solid #81c784;
+            margin-top: 6px;
+            font-size: 0.95em;
+        }
+
+        .slide-palco-wrapper {
+            max-width: 850px;
+            margin: 20px auto 0 auto;
+            border: 5px solid #4caf50;
+            border-radius: 24px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+            overflow: hidden;
+            background: #ffffff;
+            line-height: 0;
+        }
+
+        .slide-img-firme {
+            width: 100%;
+            height: auto;
+            display: block;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        .barra-progresso-limpa {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #ffa502;
+            width: 7.14%;
+            transition: width 0.35s ease;
+        }
+
+        .controles-apresentacao {
+            max-width: 850px;
+            margin: 20px auto 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-slide-nav {
+            background: #e8f5e9;
+            color: #1b5e20;
+            border: 2px solid #81c784;
+            padding: 12px 26px;
+            border-radius: 30px;
+            font-family: 'Fredoka', cursive, sans-serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-slide-nav:hover {
+            background: #c8e6c9;
+            transform: translateY(-2px);
+        }
+
+        .btn-slide-destaque {
+            background: #ffa502;
+            color: #1e272e;
+            border-color: #ffa502;
+            font-weight: 700;
+        }
+
+        .btn-slide-destaque:hover {
+            background: #ffca28;
+        }
+
+        .jogo-section {
+            background-color: rgba(255, 255, 255, 0.96);
+            border: 3px solid #a8e6cf;
+            text-align: center;
+        }
+
+        .badge-game {
+            background-color: #ff4757;
+            color: #ffffff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .jogo-header h2 {
+            color: #2e7d32;
+            font-size: 2.1em;
+            margin-bottom: 6px;
+        }
+
+        .placar-progresso {
+            display: inline-block;
+            margin-top: 8px;
+            background: #f1f8e9;
+            color: #2e7d32;
+            font-weight: 700;
+            font-size: 0.95em;
+            padding: 5px 18px;
+            border-radius: 20px;
+            border: 2px solid #a5d6a7;
+        }
+
+        .area-jogo {
+            margin-top: 20px;
+        }
+
+        .teka-guia-jogo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            background-color: #e8f5e9;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 2px solid #a3d9b1;
+            max-width: 560px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .teka-guia-jogo.teka-jogo-falando {
+            border-color: #ffa502;
+            box-shadow: 0 0 18px rgba(255, 165, 2, 0.45);
+        }
+
+        .teka-guia-jogo.teka-jogo-falando .teka-avatar-jogo {
+            animation: avatarJogoFalando 0.4s ease-in-out infinite alternate;
+            border-color: #ffa502;
+        }
+
+        @keyframes avatarJogoFalando {
+            from { transform: scale(1) rotate(-3deg); }
+            to   { transform: scale(1.1) rotate(3deg); }
+        }
+
+        .teka-avatar-jogo {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            flex-shrink: 0;
+        }
+
+        .balao-jogo p {
+            margin: 0;
+            font-size: 0.95em;
+            color: #1b5e20;
+            text-align: left;
+        }
+
+        .cartao-desafio {
+            background: #ffffff;
+            border: 3px dashed #2e7d32;
+            border-radius: 20px;
+            padding: 22px;
+            width: 270px;
+            margin: 0 auto 35px auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            position: relative;
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .cartao-tag {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffa502;
+            color: #1e272e;
+            font-size: 0.78em;
+            padding: 3px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .foto-item-wrapper {
+            width: 100%;
+            height: 175px;
+            margin-top: 8px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #e8f5e9;
+        }
+
+        #foto-item {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .icone-gigante {
+            font-size: 5em;
+        }
+
+        .nome-desafio {
+            font-size: 1.25em;
+            font-weight: 700;
+            color: #1e272e;
+            margin-top: 12px;
+        }
+
+        .opcoes-lixeiras {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .lixeira-container {
+            width: 140px;
+            cursor: pointer;
+            transition: transform 0.25s ease;
+            user-select: none;
+        }
+
+        .lixeira-container:hover {
+            transform: translateY(-10px);
+        }
+
+        .tampa-3d {
+            height: 22px;
+            border-radius: 12px 12px 0 0;
+            position: relative;
+            box-shadow: inset 0 3px 0 rgba(255,255,255,0.3), 0 3px 6px rgba(0,0,0,0.15);
+        }
+
+        .puxador {
+            width: 35px;
+            height: 6px;
+            background-color: rgba(255,255,255,0.6);
+            border-radius: 4px;
+            margin: 0 auto;
+            position: relative;
+            top: 4px;
+        }
+
+        .corpo-3d {
+            height: 140px;
+            border-radius: 0 0 18px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            padding: 10px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.18), inset 0 -6px 0 rgba(0,0,0,0.15);
+        }
+
+        .emoji-lixeira {
+            font-size: 2.8em;
+            margin-bottom: 4px;
+        }
+
+        .label-lixeira {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .l-eletronico .tampa-3d, .l-eletronico .corpo-3d { background-color: #e65100; }
+        .l-reciclavel .tampa-3d, .l-reciclavel .corpo-3d { background-color: #1565c0; }
+        .l-organico .tampa-3d, .l-organico .corpo-3d { background-color: #5d4037; }
+
+        #feedback-jogo {
+            margin-top: 30px;
+            padding: 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1.15em;
+        }
+
+        .escondido { display: none !important; }
+        .sucesso { background-color: #d4edda; color: #155724; border: 2px solid #c3e6cb; }
+        .erro { background-color: #f8d7da; color: #721c24; border: 2px solid #f5c6cb; }
+
+        .certificado-wrapper {
+            margin-top: 25px;
+            animation: aparecerSuave 0.5s ease-out;
+        }
+
+        @keyframes aparecerSuave {
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .input-nome-box {
+            background: #e8f5e9;
+            border: 2px solid #81c784;
+            padding: 18px;
+            border-radius: 16px;
+            max-width: 550px;
+            margin: 0 auto 25px auto;
+        }
+
+        .input-nome-box label {
+            display: block;
+            font-weight: 700;
+            color: #1b5e20;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        .input-nome-box input {
+            width: 85%;
+            max-width: 380px;
+            padding: 10px 16px;
+            font-size: 1.05em;
+            border: 2px solid #4caf50;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            outline: none;
+        }
+
+        .input-nome-box input:focus {
+            border-color: #ffa502;
+            box-shadow: 0 0 8px rgba(255, 165, 2, 0.4);
+        }
+
+        .certificado-card {
+            background: linear-gradient(135deg, #fffdf7 0%, #f1f8e9 100%);
+            border: 8px solid #2e7d32;
+            border-radius: 24px;
+            padding: 14px;
+            max-width: 720px;
+            margin: 0 auto;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.14);
+        }
+
+        .certificado-borda-interna {
+            border: 3px dashed #ffa502;
+            border-radius: 16px;
+            padding: 35px 30px;
+            position: relative;
+        }
+
+        .certificado-medalha {
+            font-size: 3.6em;
+            margin-bottom: 5px;
+        }
+
+        .certificado-subtitulo {
+            display: block;
+            font-size: 0.85em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #e65100;
+            margin-bottom: 6px;
+        }
+
+        .certificado-titulo {
+            color: #1b5e20;
+            font-size: 2.2em;
+            margin: 0 0 15px 0;
+        }
+
+        .certificado-texto-intro {
+            font-size: 1.1em;
+            color: #37474f;
+            margin: 0;
+        }
+
+        .certificado-nome-destaque {
+            font-family: 'Fredoka', cursive, sans-serif;
+            font-size: 2.1em;
+            color: #2e7d32;
+            border-bottom: 3px solid #81c784;
+            display: inline-block;
+            min-width: 280px;
+            padding: 4px 20px;
+            margin: 10px 0 18px 0;
+        }
+
+        .certificado-descricao {
+            font-size: 1.05em;
+            color: #2c3e50;
+            max-width: 560px;
+            margin: 0 auto 28px auto;
+        }
+
+        .certificado-rodape {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #c8e6c9;
+        }
+
+        .certificado-assinatura-bloco {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .certificado-avatar-teka {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #4caf50;
+        }
+
+        .linha-assinatura {
+            font-weight: 700;
+            color: #1b5e20;
+            font-size: 1em;
+        }
+
+        .selo-oficial {
+            background: #ffa502;
+            color: #1e272e;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            line-height: 1.2;
+            text-align: left;
+        }
+
+        .selo-oficial .emoji-render {
+            font-size: 2em;
+        }
+
+        .certificado-acoes {
+            margin-top: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-certificado {
+            border: none;
+            padding: 14px 24px;
+            border-radius: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-certificado:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .btn-imprimir {
+            background: #2e7d32;
+            color: #ffffff;
+        }
+
+        .btn-reiniciar {
+            background: #ffa502;
+            color: #1e272e;
+        }
+
+        .encerramento-wrapper {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 3px dashed #81c784;
+            text-align: center;
+        }
+
+        .encerramento-wrapper h3 {
+            color: #2e7d32;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .encerramento-palco {
+            max-width: 720px;
+            margin: 0 auto 20px auto;
+        }
+
+        .pontos-section {
+            border: 3px solid #81c784;
+        }
+
+        .pontos-header {
+            text-align: center;
+        }
+
+        .badge-pontos {
+            background-color: #2e7d32;
+            color: #ffffff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .pontos-header h2 {
+            color: #2e7d32;
+            font-size: 2.1em;
+            margin: 0 0 8px 0;
+        }
+
+        .aviso-verificacao-materiais {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: 20px;
+            background-color: #fff3e0;
+            border: 2px solid #ffb74d;
+            border-left: 6px solid #f57c00;
+            padding: 15px 20px;
+            border-radius: 14px;
+            color: #4e342e;
+            font-size: 0.96em;
+        }
+
+        .aviso-icon {
+            font-size: 2em;
+            flex-shrink: 0;
+        }
+
+        .pontos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .ponto-card {
+            background-color: #fbfdfb;
+            border: 2px solid #c8e6c9;
+            padding: 22px;
+            border-radius: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .ponto-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(46, 125, 50, 0.12);
+        }
+
+        .ponto-icon {
+            font-size: 2.2em;
+            margin-bottom: 8px;
+        }
+
+        .ponto-card h3 {
+            color: #2e7d32;
+            font-size: 1.25em;
+            margin: 0 0 6px 0;
+        }
+
+        .ponto-card p {
+            color: #485460;
+            font-size: 0.95em;
+            margin: 0 0 16px 0;
+        }
+
+        .btn-maps, .btn-maps:visited {
+            display: block;
+            padding: 10px 15px;
+            background-color: #e8f5e9;
+            color: #2e7d32 !important;
+            text-decoration: none !important;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95em;
+            text-align: center;
+            border: 2px solid #a5d6a7;
+            transition: background 0.2s;
+        }
+
+        .btn-maps:hover {
+            background-color: #c8e6c9;
+        }
+
+        .dica-importante {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            background-color: #fffde7;
+            border-left: 6px solid #ffa502;
+            padding: 18px 22px;
+            border-radius: 12px;
+        }
+
+        .dica-icon {
+            font-size: 2.2em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            background: #1b5e20;
+            color: #ffffff;
+            margin-top: 50px;
+        }
+
+        footer p { margin: 4px 0; }
+        .credito-autor { opacity: 0.8; font-size: 0.9em; }
+
+        @media print {
+            @page {
+                size: A4 landscape;
+                margin: 10mm;
+            }
+
+            html, body {
+                background: #ffffff !important;
+                background-image: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                height: auto !important;
+                min-height: 0 !important;
+                overflow: visible !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            header.hero,
+            .teka-hero-card,
+            #secao-video,
+            #secao-pontos,
+            footer,
+            .jogo-header,
+            #area-jogo-ativa,
+            .nao-imprimir {
+                display: none !important;
+            }
+
+            main.container,
+            #secao-desafio,
+            #tela-certificado {
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                box-shadow: none !important;
+                background: transparent !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                display: block !important;
+            }
+
+            #certificado-imprimivel {
+                position: static !important;
+                width: 100% !important;
+                max-width: 760px !important;
+                margin: 0 auto !important;
+                box-shadow: none !important;
+                page-break-before: avoid !important;
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.4em; }
+            .card-section { padding: 25px 18px; }
+            .teka-apresentacao { flex-direction: column; text-align: center; }
+            .teka-img-frame img { width: 180px; }
+            .teka-guia-jogo { flex-direction: column; text-align: center; border-radius: 20px; }
+            .balao-jogo p { text-align: center; }
+            .opcoes-lixeiras { gap: 15px; }
+            .lixeira-container { width: 105px; }
+            .corpo-3d { height: 120px; }
+            .emoji-lixeira { font-size: 2.2em; }
+            .certificado-titulo { font-size: 1.6em; }
+            .certificado-nome-destaque { font-size: 1.5em; min-width: auto; }
+            .aviso-verificacao-materiais { flex-direction: column; text-align: center; }
+        }
+    </style>
 </head>
 <body>
 
@@ -29,7 +968,7 @@
         <section class="card-section teka-hero-card">
             <div class="teka-apresentacao">
                 <div class="teka-img-frame">
-                    <img src="teka-nova.jpg" onerror="this.onerror=null; this.src='teka-nova.jpeg';" alt="Oi! Eu sou a Teka!">
+                    <img src="teka-nova.jpg" onerror="this.onerror=null; this.src='capaindex.jpg';" alt="Oi! Eu sou a Teka!">
                 </div>
                 <div class="teka-balao">
                     <span class="tag-personagem">👧 Sua Guia Ecológica</span>
@@ -64,19 +1003,20 @@
                 <span class="badge-video">🎬 Apresentação Animada</span>
                 <h2>Assista e Ouça: A Descoberta da Teka!</h2>
                 <p>Acompanhe os slides abaixo com a explicação da Teka!</p>
+                <div class="indicador-slide">📽️ Slide <span id="num-slide-atual">1</span> de 14</div>
             </div>
 
             <div class="slide-palco-wrapper" id="videoContainer">
-                <img id="cenarioBgImg" class="slide-img-firme" src="1.jpeg" alt="Slide da Apresentação da Teka">
+                <img id="cenarioBgImg" class="slide-img-firme" src="1.jpg" alt="Slide da Apresentação da Teka">
                 <div class="barra-progresso-limpa">
                     <div class="progress-bar" id="progressBar"></div>
                 </div>
             </div>
 
             <div class="controles-apresentacao">
-                <button class="btn-slide-nav" onclick="voltarSlide()">⬅ Anterior</button>
-                <button class="btn-slide-nav btn-slide-destaque" id="btnPlayAudioSlide" onclick="tocarOuPausarAudioSlide()">▶ Ouvir a Teka</button>
-                <button class="btn-slide-nav" onclick="avancarSlide()">Próximo ➡</button>
+                <button type="button" class="btn-slide-nav" onclick="voltarSlide()">⬅ Anterior</button>
+                <button type="button" class="btn-slide-nav btn-slide-destaque" id="btnPlayAudioSlide" onclick="tocarOuPausarAudioSlide()">▶ Ouvir a Teka</button>
+                <button type="button" class="btn-slide-nav" onclick="avancarSlide()">Próximo ➡</button>
             </div>
         </section>
 
@@ -93,19 +1033,20 @@
             <div class="area-jogo" id="area-jogo-ativa">
                 
                 <div class="teka-guia-jogo" id="tekaGuiaJogoBox">
-                    <img src="teka-nova.jpg" onerror="this.onerror=null; this.src='teka-nova.jpeg';" alt="Teka ajudando no jogo" class="teka-avatar-jogo" id="tekaAvatarJogoImg">
+                    <img src="teka-nova.jpg" onerror="this.onerror=null; this.src='capaindex.jpg';" alt="Teka ajudando no jogo" class="teka-avatar-jogo" id="tekaAvatarJogoImg">
                     <div class="balao-jogo">
                         <p id="fala-teka-jogo"><strong>Dica da Teka:</strong> "Olhe bem a foto no cartão e clique na lixeira da cor correspondente!"</p>
                     </div>
                 </div>
 
+                <!-- Já inicia preenchido com o Item 1 para nunca ficar em "Carregando..." -->
                 <div class="cartao-desafio" id="cartao-anima">
                     <div class="cartao-tag">Item para Descarte</div>
                     <div class="foto-item-wrapper">
-                        <img id="foto-item" src="" alt="Item para descarte">
+                        <img id="foto-item" src="celular.jfif" alt="Celular Quebrado">
                         <div id="icone-item" class="icone-gigante emoji-render escondido">📱</div>
                     </div>
-                    <div id="nome-item" class="nome-desafio">Carregando...</div>
+                    <div id="nome-item" class="nome-desafio">Celular Quebrado</div>
                 </div>
 
                 <div class="opcoes-lixeiras">
@@ -164,7 +1105,7 @@
 
                         <div class="certificado-rodape">
                             <div class="certificado-assinatura-bloco">
-                                <img src="teka-nova.jpg" onerror="this.onerror=null; this.src='teka-nova.jpeg';" alt="Teka" class="certificado-avatar-teka">
+                                <img src="teka-nova.jpg" onerror="this.onerror=null; this.src='capaindex.jpg';" alt="Teka" class="certificado-avatar-teka">
                                 <div>
                                     <div class="linha-assinatura">Teka • Guia Ecológica</div>
                                     <small id="data-certificado">Missão Cumprida!</small>
@@ -179,8 +1120,18 @@
                 </div>
 
                 <div class="certificado-acoes nao-imprimir">
-                    <button class="btn-certificado btn-imprimir" onclick="imprimirCertificado()">🖨️ Imprimir / Salvar Certificado</button>
-                    <button class="btn-certificado btn-reiniciar" onclick="reiniciarJogo()">🔄 Jogar Novamente</button>
+                    <button type="button" class="btn-certificado btn-imprimir" onclick="imprimirCertificado()">🖨️ Imprimir / Salvar Certificado</button>
+                    <button type="button" class="btn-certificado btn-reiniciar" onclick="reiniciarJogo()">🔄 Jogar Novamente</button>
+                </div>
+
+                <div class="encerramento-wrapper nao-imprimir">
+                    <h3>🎉 Missão Cumprida! Mensagem Final da Teka:</h3>
+                    <div class="slide-palco-wrapper encerramento-palco">
+                        <img id="imgEncerramento" src="encerramento.jpg" class="slide-img-firme" alt="Encerramento da Missão E-Lixo">
+                    </div>
+                    <div class="controles-apresentacao">
+                        <button type="button" class="btn-slide-nav btn-slide-destaque" id="btnAudioEncerramento" onclick="tocarOuPausarEncerramento()">▶ Ouvir Encerramento da Teka</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -268,6 +1219,488 @@
         <p class="credito-autor">Projeto desenvolvido por Caroline de Santana | Análise e Desenvolvimento de Sistemas</p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- JAVASCRIPT EMBUTIDO DIRETAMENTE PARA NÃO FALHAR NUNCA -->
+    <script>
+        let audioCtx = null;
+        let voiceEnabled = true;
+
+        function inicializarAudio() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioContextClass) {
+                    audioCtx = new AudioContextClass();
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function tocarSomAcerto() {
+            if (!voiceEnabled) return;
+            inicializarAudio();
+            if (!audioCtx) return;
+
+            const agora = audioCtx.currentTime;
+            const notas = [523.25, 659.25, 783.99, 1046.50];
+
+            notas.forEach((freq, index) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(freq, agora + index * 0.09);
+
+                gain.gain.setValueAtTime(0.22, agora + index * 0.09);
+                gain.gain.exponentialRampToValueAtTime(0.001, agora + index * 0.09 + 0.25);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(agora + index * 0.09);
+                osc.stop(agora + index * 0.09 + 0.25);
+            });
+        }
+
+        function tocarSomErro() {
+            if (!voiceEnabled) return;
+            inicializarAudio();
+            if (!audioCtx) return;
+
+            const agora = audioCtx.currentTime;
+            const notas = [220, 175];
+
+            notas.forEach((freq, index) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(freq, agora + index * 0.16);
+
+                gain.gain.setValueAtTime(0.15, agora + index * 0.16);
+                gain.gain.exponentialRampToValueAtTime(0.001, agora + index * 0.16 + 0.22);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(agora + index * 0.16);
+                osc.stop(agora + index * 0.16 + 0.22);
+            });
+        }
+
+        function tocarFanfarraVitoria() {
+            if (!voiceEnabled) return;
+            inicializarAudio();
+            if (!audioCtx) return;
+
+            const agora = audioCtx.currentTime;
+            const melodia = [
+                { freq: 523.25, tempo: 0.0, dur: 0.15 },
+                { freq: 659.25, tempo: 0.15, dur: 0.15 },
+                { freq: 783.99, tempo: 0.30, dur: 0.15 },
+                { freq: 1046.50, tempo: 0.45, dur: 0.35 },
+                { freq: 783.99, tempo: 0.80, dur: 0.18 },
+                { freq: 1046.50, tempo: 1.00, dur: 0.60 }
+            ];
+
+            melodia.forEach(nota => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(nota.freq, agora + nota.tempo);
+
+                gain.gain.setValueAtTime(0.28, agora + nota.tempo);
+                gain.gain.exponentialRampToValueAtTime(0.001, agora + nota.tempo + nota.dur);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(agora + nota.tempo);
+                osc.stop(agora + nota.tempo + nota.dur);
+            });
+        }
+
+        const scenes = [
+            { numero: 1, audioFile: "cena1.mp3" },
+            { numero: 2, audioFile: "cena2.mp3" },
+            { numero: 3, audioFile: "cena3.mp3" },
+            { numero: 4, audioFile: "cena4.mp3" },
+            { numero: 5, audioFile: "cena5.mp3" },
+            { numero: 6, audioFile: "cena6.mp3" },
+            { numero: 7, audioFile: "cena7.mp3" },
+            { numero: 8, audioFile: "cena8.mp3" },
+            { numero: 9, audioFile: "cena9.mp3" },
+            { numero: 10, audioFile: "cena10.mp3" },
+            { numero: 11, audioFile: "cena11.mp3" },
+            { numero: 12, audioFile: "cena12.mp3" },
+            { numero: 13, audioFile: "cena13.mp3" },
+            { numero: 14, audioFile: "cena14.mp3" }
+        ];
+
+        let currentScene = 0;
+        let isPlaying = false;
+        let isPlayingEncerramento = false;
+        let playerVozSalva = new Audio();
+
+        function pararQualquerVoz() {
+            if (playerVozSalva) {
+                playerVozSalva.pause();
+                playerVozSalva.currentTime = 0;
+            }
+            isPlayingEncerramento = false;
+            atualizarBotaoEncerramento();
+        }
+
+        // Procura a imagem do slide na pasta principal ou em subpastas comuns
+        function carregarImagemSlide(numeroCena) {
+            const bgImg = document.getElementById("cenarioBgImg");
+            if (!bgImg) return;
+            
+            const possiveisNomes = [
+                numeroCena + ".jpg",
+                numeroCena + ".jpeg",
+                numeroCena + ".JPG",
+                "slides/" + numeroCena + ".jpg",
+                "slides/" + numeroCena + ".jpeg",
+                "imagens/" + numeroCena + ".jpg",
+                "img/" + numeroCena + ".jpg",
+                "slide" + numeroCena + ".jpg"
+            ];
+
+            let idx = 0;
+            function tentarProximo() {
+                if (idx >= possiveisNomes.length) return;
+                const arquivo = possiveisNomes[idx];
+                idx++;
+
+                bgImg.onerror = tentarProximo;
+                bgImg.src = arquivo;
+            }
+
+            tentarProximo();
+        }
+
+        function atualizarBotaoPlaySlide() {
+            const btn = document.getElementById("btnPlayAudioSlide");
+            if (!btn) return;
+            btn.innerText = isPlaying ? "⏸ Pausar" : "▶ Ouvir a Teka";
+        }
+
+        // Procura o áudio do slide na pasta principal ou em subpastas comuns
+        function tocarAudioDoSlideAtual() {
+            pararQualquerVoz();
+            const n = scenes[currentScene].numero;
+            
+            const possiveisAudios = [
+                "cena" + n + ".mp3",
+                n + ".mp3",
+                "cena" + n + ".MP3",
+                n + ".MP3",
+                "audios/cena" + n + ".mp3",
+                "audio/cena" + n + ".mp3",
+                "audios/" + n + ".mp3",
+                "audio/" + n + ".mp3"
+            ];
+
+            let idxAudio = 0;
+
+            function tentarProximoAudio() {
+                if (idxAudio >= possiveisAudios.length) {
+                    isPlaying = false;
+                    atualizarBotaoPlaySlide();
+                    return;
+                }
+
+                const arquivoAudio = possiveisAudios[idxAudio];
+                idxAudio++;
+
+                playerVozSalva = new Audio(arquivoAudio);
+
+                playerVozSalva.onended = () => {
+                    if (isPlaying && currentScene < scenes.length - 1) {
+                        currentScene++;
+                        updateScene(true);
+                    } else {
+                        isPlaying = false;
+                        atualizarBotaoPlaySlide();
+                    }
+                };
+
+                playerVozSalva.onerror = tentarProximoAudio;
+
+                playerVozSalva.play().catch((err) => {
+                    if (err.name === "NotAllowedError") {
+                        isPlaying = false;
+                        atualizarBotaoPlaySlide();
+                    } else {
+                        tentarProximoAudio();
+                    }
+                });
+            }
+
+            tentarProximoAudio();
+        }
+
+        function updateScene(tocarAutomatico = false) {
+            pararQualquerVoz();
+            const s = scenes[currentScene];
+
+            carregarImagemSlide(s.numero);
+
+            const numSlideEl = document.getElementById("num-slide-atual");
+            if (numSlideEl) numSlideEl.innerText = s.numero;
+
+            const progress = ((currentScene + 1) / scenes.length) * 100;
+            const bar = document.getElementById("progressBar");
+            if (bar) bar.style.width = progress + "%";
+
+            atualizarBotaoPlaySlide();
+
+            if (tocarAutomatico && isPlaying) {
+                tocarAudioDoSlideAtual();
+            }
+        }
+
+        function tocarOuPausarAudioSlide() {
+            if (isPlaying) {
+                isPlaying = false;
+                pararQualquerVoz();
+                atualizarBotaoPlaySlide();
+            } else {
+                isPlaying = true;
+                atualizarBotaoPlaySlide();
+                tocarAudioDoSlideAtual();
+            }
+        }
+
+        function avancarSlide() {
+            currentScene = (currentScene + 1) % scenes.length;
+            updateScene(isPlaying);
+        }
+
+        function voltarSlide() {
+            currentScene = (currentScene - 1 + scenes.length) % scenes.length;
+            updateScene(isPlaying);
+        }
+
+        const desafios = [
+            { nome: "Celular Quebrado", base: "celular", icone: "📱", respostaCorreta: "eletronico" },
+            { nome: "Casca de Banana", base: "banana", icone: "🍌", respostaCorreta: "organico" },
+            { nome: "Mouse de Computador", base: "mouse", icone: "🖱️", respostaCorreta: "eletronico" },
+            { nome: "Garrafa Plástica PET", base: "garrafa", icone: "🥤", respostaCorreta: "reciclavel" },
+            { nome: "Pilhas Usadas", base: "pilhas", icone: "🔋", respostaCorreta: "eletronico" },
+            { nome: "Caixa de Papelão", base: "papelao", icone: "📦", respostaCorreta: "reciclavel" },
+            { nome: "Fone de Ouvido Velho", base: "fone", icone: "🎧", respostaCorreta: "eletronico" },
+            { nome: "Resto de Maçã", base: "maca", icone: "🍎", respostaCorreta: "organico" },
+            { nome: "Teclado de Computador", base: "teclado", icone: "⌨️", respostaCorreta: "eletronico" },
+            { nome: "Latinha de Alumínio", base: "latinha", icone: "🥫", respostaCorreta: "reciclavel" },
+            { nome: "Notebook Antigo", base: "notebook", icone: "💻", respostaCorreta: "eletronico" },
+            { nome: "Cascas de Ovos", base: "ovos", icone: "🥚", respostaCorreta: "organico" },
+            { nome: "Cabos e Carregadores", base: "cabos", icone: "🔌", respostaCorreta: "eletronico" },
+            { nome: "Controle de Videogame", base: "controle", icone: "🎮", respostaCorreta: "eletronico" },
+            { nome: "Folhas e Restos de Verdura", base: "verdura", icone: "🥬", respostaCorreta: "organico" }
+        ];
+
+        let indiceAtual = 0;
+        let bloqueioClique = false;
+
+        function carregarDesafio() {
+            bloqueioClique = false;
+            const cartao = document.getElementById('cartao-anima');
+            const itemAtual = desafios[indiceAtual];
+            const imgEl = document.getElementById('foto-item');
+            const iconeEl = document.getElementById('icone-item');
+
+            if (!cartao || !imgEl || !iconeEl) return;
+
+            document.getElementById('nome-item').innerText = itemAtual.nome;
+            document.getElementById('contador-atual').innerText = indiceAtual + 1;
+            document.getElementById('feedback-jogo').className = 'escondido';
+            iconeEl.innerText = itemAtual.icone;
+
+            // Tenta carregar .jfif, .jpg, .jpeg ou subpastas
+            const caminhosImagem = [
+                itemAtual.base + ".jfif",
+                itemAtual.base + ".jpg",
+                itemAtual.base + ".jpeg",
+                itemAtual.base + ".png",
+                "imagens/" + itemAtual.base + ".jfif",
+                "img/" + itemAtual.base + ".jfif",
+                "desafios/" + itemAtual.base + ".jfif",
+                "imagens/" + itemAtual.base + ".jpg"
+            ];
+
+            let idxImg = 0;
+            iconeEl.classList.add('escondido');
+            imgEl.classList.remove('escondido');
+
+            function tentarProximaFotoDesafio() {
+                if (idxImg >= caminhosImagem.length) {
+                    imgEl.classList.add('escondido');
+                    iconeEl.classList.remove('escondido');
+                    return;
+                }
+                const caminho = caminhosImagem[idxImg];
+                idxImg++;
+                imgEl.onerror = tentarProximaFotoDesafio;
+                imgEl.src = caminho;
+            }
+
+            tentarProximaFotoDesafio();
+        }
+
+        function tocarAudioJogo(nomeBaseMp3) {
+            if (!voiceEnabled || isPlaying) return;
+            const guiaJogo = document.getElementById("tekaGuiaJogoBox");
+            const opcoes = [
+                nomeBaseMp3 + ".mp3",
+                "audios/" + nomeBaseMp3 + ".mp3",
+                "audio/" + nomeBaseMp3 + ".mp3"
+            ];
+            let i = 0;
+            function tentar() {
+                if (i >= opcoes.length) return;
+                const audioJogo = new Audio(opcoes[i]);
+                i++;
+                audioJogo.onplay = () => { if (guiaJogo) guiaJogo.classList.add("teka-jogo-falando"); };
+                audioJogo.onended = () => { if (guiaJogo) guiaJogo.classList.remove("teka-jogo-falando"); };
+                audioJogo.onerror = () => {
+                    if (guiaJogo) guiaJogo.classList.remove("teka-jogo-falando");
+                    tentar();
+                };
+                audioJogo.play().catch(() => {});
+            }
+            tentar();
+        }
+
+        function verificarResposta(tipoEscolhido) {
+            if (bloqueioClique) return;
+
+            const feedback = document.getElementById('feedback-jogo');
+            const falaTekaJogo = document.getElementById('fala-teka-jogo');
+            const itemAtual = desafios[indiceAtual];
+            const respostaCerta = itemAtual.respostaCorreta;
+
+            if (tipoEscolhido === respostaCerta) {
+                bloqueioClique = true;
+                tocarSomAcerto();
+
+                feedback.innerHTML = "🎉 Mandou muito bem! Você descartou " + itemAtual.nome + " na lixeira certa!";
+                feedback.className = "sucesso";
+                if (falaTekaJogo) {
+                    falaTekaJogo.innerHTML = '<strong>Teka diz:</strong> "Mandou muito bem! Você descartou na lixeira certa!"';
+                }
+
+                tocarAudioJogo("acerto");
+                
+                setTimeout(function() {
+                    if (indiceAtual < desafios.length - 1) {
+                        indiceAtual++;
+                        carregarDesafio();
+                    } else {
+                        exibirCertificadoFinal();
+                    }
+                }, 2000);
+            } else {
+                tocarSomErro();
+                feedback.innerHTML = "❌ Ops! Essa não é a lixeira adequada para " + itemAtual.nome + ". Tente outra cor!";
+                feedback.className = "erro";
+                if (falaTekaJogo) {
+                    falaTekaJogo.innerHTML = '<strong>Teka diz:</strong> "Ops! Essa não é a lixeira certa. Tente outra cor!"';
+                }
+
+                tocarAudioJogo("erro");
+            }
+        }
+
+        function exibirCertificadoFinal() {
+            document.getElementById('area-jogo-ativa').classList.add('escondido');
+            document.getElementById('placar-box').classList.add('escondido');
+            document.getElementById('tela-certificado').classList.remove('escondido');
+
+            const hoje = new Date().toLocaleDateString('pt-BR');
+            document.getElementById('data-certificado').innerText = "Conquistado em " + hoje;
+
+            tocarFanfarraVitoria();
+
+            setTimeout(() => {
+                tocarAudioJogo("vitoria");
+            }, 600);
+        }
+
+        function atualizarNomeCertificado(valor) {
+            const campoNome = document.getElementById('nome-no-certificado');
+            if (valor.trim() === "") {
+                campoNome.innerText = "Super Guardião(ã) do Planeta";
+            } else {
+                campoNome.innerText = valor.trim();
+            }
+        }
+
+        function imprimirCertificado() {
+            window.print();
+        }
+
+        function reiniciarJogo() {
+            pararQualquerVoz();
+            indiceAtual = 0;
+            document.getElementById('tela-certificado').classList.add('escondido');
+            document.getElementById('area-jogo-ativa').classList.remove('escondido');
+            document.getElementById('placar-box').classList.remove('escondido');
+            carregarDesafio();
+        }
+
+        function atualizarBotaoEncerramento() {
+            const btn = document.getElementById("btnAudioEncerramento");
+            if (!btn) return;
+            btn.innerText = isPlayingEncerramento ? "⏸ Pausar Encerramento" : "▶ Ouvir Encerramento da Teka";
+        }
+
+        function tocarOuPausarEncerramento() {
+            if (isPlayingEncerramento) {
+                pararQualquerVoz();
+                return;
+            }
+
+            isPlaying = false;
+            atualizarBotaoPlaySlide();
+            pararQualquerVoz();
+
+            isPlayingEncerramento = true;
+            atualizarBotaoEncerramento();
+
+            const opcoesEncerramento = [
+                "encerramento.mp3",
+                "encerramento.MP3",
+                "audios/encerramento.mp3",
+                "audio/encerramento.mp3"
+            ];
+            let idx = 0;
+
+            function tentarAudioFinal() {
+                if (idx >= opcoesEncerramento.length) {
+                    isPlayingEncerramento = false;
+                    atualizarBotaoEncerramento();
+                    return;
+                }
+                playerVozSalva = new Audio(opcoesEncerramento[idx]);
+                idx++;
+                playerVozSalva.onended = () => {
+                    isPlayingEncerramento = false;
+                    atualizarBotaoEncerramento();
+                };
+                playerVozSalva.onerror = tentarAudioFinal;
+                playerVozSalva.play().catch(tentarAudioFinal);
+            }
+
+            tentarAudioFinal();
+        }
+
+        // Inicializa imediatamente assim que o HTML é lido
+        document.addEventListener("DOMContentLoaded", function() {
+            const totalEl = document.getElementById('contador-total');
+            if (totalEl) totalEl.innerText = desafios.length;
+            updateScene(false);
+            carregarDesafio();
+        });
+    </script>
 </body>
 </html>
